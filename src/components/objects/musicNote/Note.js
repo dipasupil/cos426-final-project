@@ -30,12 +30,36 @@ class Note extends Group {
         }
         
         var note = new THREE.Mesh(new THREE.BoxGeometry(.5, .5,.5), new THREE.MeshBasicMaterial({color: color1, transparent:false, opacity:0.5}));
+        
+        if (random == 0) {
+            note.name = "note0"
+        }
+        
+        if (random == 1) {
+            note.name = "note1"
+        }
+
+        if (random == 2) {
+            note.name = "note2"            
+        }
+
+        if (random == 3) {
+            note.name = "note3"
+        }
+
+        if (random == 4) {
+            note.name = "note4"
+        } 
+        
         this.add(note)
+
     }
 
     update(objects) {
-        this.position.set(this.position.x, this.position.y, this.position.z + .2)
+        this.position.add(new THREE.Vector3(0,  0, .2));
     }
+
+
 }
 
 export default Note;

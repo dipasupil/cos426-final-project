@@ -37,11 +37,66 @@ controls.minDistance = 4;
 controls.maxDistance = 16;
 controls.update();
 
+// create an AudioListener and add it to the camera
+const listener = new THREE.AudioListener();
+camera.add( listener );
+
+// create a global audio source
+const hit_sound = new THREE.Audio( listener );
+const miss_sound = new THREE.Audio(listener);
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+const audioLoader1 = new THREE.AudioLoader();
+
+function hitsound() {
+    audioLoader.load( 'src/sounds/hitsound.wav', function( buffer ) {
+        hit_sound.setBuffer( buffer );
+        hit_sound.play();
+    });
+}
+
+function misssound() {
+    audioLoader1.load( 'src/sounds/miss_sound.wav', function( buffer ) {
+        miss_sound.setBuffer( buffer );
+        miss_sound.play();
+    });
+}
+
+
+function handleKeyPress(event) {
+    const keyMap = {
+        KeyD: 0,
+        KeyF: 1,
+        Space:  2,
+        KeyJ: 3,
+        KeyK: 4,
+    };
+
+    if (keyMap[event.code] !== undefined) {
+        var hit = scene.updateKeyPress(keyMap[event.code]);
+        console.log(hit);
+        if (hit) {
+            hitsound();
+        }
+        if (!hit || hit === undefined) {
+            misssound();
+        }
+
+        renderer.render(scene, camera);
+    }
+}
+
+
 // Render loop
 const onAnimationFrameHandler = (timeStamp) => {
     controls.update();
     renderer.render(scene, camera);
-    scene.update(timeStamp);
+    var miss = scene.update(timeStamp);
+    if (miss) {
+        misssound();
+    }
+
     
     if (!scene.gameOver()) {
         window.requestAnimationFrame(onAnimationFrameHandler);
@@ -83,15 +138,13 @@ const onAnimationFrameHandler = (timeStamp) => {
         camera.position.set(0,0,20);
         camera.lookAt(-10, -1, 0);
 
-
-
         renderer.render(scene, camera);
         });   
 
     }
 };
 
-    window.requestAnimationFrame(onAnimationFrameHandler);
+window.requestAnimationFrame(onAnimationFrameHandler);
 
 // Resize Handler
 const windowResizeHandler = () => {
@@ -103,3 +156,5 @@ const windowResizeHandler = () => {
 
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
+
+window.addEventListener("keydown", handleKeyPress);
