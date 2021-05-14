@@ -20,7 +20,7 @@ class GameScene extends Scene {
 
         var instructions = document.createElement('div');
         instructions.style.position = 'absolute';
-        instructions.style.backgroundColor = "white";
+        instructions.style.color = "white";
         instructions.style.fontFamily = "Roboto";
         instructions.innerHTML = "The 'D', 'F', Space, 'J', and 'K' keys correspond to</br> each of the five lanes, respectively. When a note</br> reaches the lane's 'goal', tap the corresponding key!</br> Your score will increment based on how accurate</br> your timing was. If you lose all five lives, the game ends.</br></br>Start the game by hitting Enter!";
         instructions.style.top = 100 + 'px';
@@ -54,7 +54,7 @@ class GameScene extends Scene {
             4: "goal4",
         }
 
-        this.speeds = [472, 472, 900, 900, 900]
+        this.speeds = [1920, 960, 480, 480, 240]
 
         // Add meshes to scene
         const lights = new BasicLights();
