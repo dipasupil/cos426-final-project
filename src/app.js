@@ -104,7 +104,7 @@ function handleKeyPress(event) {
     if (keyMap[event.code] == 5 && started == false) {
         started = true;
         window.requestAnimationFrame(onAnimationFrameHandler);
-        backgroundSound();
+        // backgroundSound();
     }
 }
 
