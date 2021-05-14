@@ -38,7 +38,7 @@ class GameScene extends Scene {
             4: "note4",
         };
 
-        this.speeds = [2000, 1600, 1200, 800, 600]
+        this.speeds = [900, 900, 900, 900, 900]
 
         // Add meshes to scene
         const lights = new BasicLights();
@@ -306,7 +306,7 @@ class GameScene extends Scene {
         
         // remove all meshes (https://stackoverflow.com/questions/35060831/how-to-remove-all-mesh-objects-from-the-scene-in-three-js)
         for (let i = this.children.length - 1; i >= 0; i--) {
-            if(this.children[i].type === "Mesh" || this.children[i].type === "GridHelper")
+            if(this.children[i].type === "GridHelper" || this.children[i].type === "Mesh")
                 this.remove(this.children[i]);
         }
         

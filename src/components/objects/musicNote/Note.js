@@ -56,7 +56,7 @@ class Note extends Group {
     }
 
     update(objects) {
-        this.position.add(new THREE.Vector3(0,  0, .2));
+        this.position.add(new THREE.Vector3(0,  0, .15));
     }
 
 

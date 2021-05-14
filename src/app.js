@@ -13,8 +13,48 @@ import * as THREE from 'three';
 
 
 // Initialize core ThreeJS components
-const scene = new SeedScene();
 const camera = new PerspectiveCamera();
+
+// create an AudioListener and add it to the camera
+const listener = new THREE.AudioListener();
+camera.add( listener );
+
+// create a global audio source
+const hit_sound = new THREE.Audio( listener );
+const miss_sound = new THREE.Audio(listener);
+const background = new THREE.Audio(listener)
+
+// load a sound and set it as the Audio object's buffer
+const audioLoader = new THREE.AudioLoader();
+const audioLoader1 = new THREE.AudioLoader();
+var started = false;
+
+function hitsound() {
+    audioLoader.load( 'src/sounds/hitsound.wav', function( buffer ) {
+        hit_sound.setBuffer( buffer );
+        hit_sound.play();
+    });
+}
+
+function misssound() {
+    audioLoader1.load( 'src/sounds/miss_sound.wav', function( buffer ) {
+        miss_sound.setBuffer( buffer );
+        miss_sound.playbackRate = 1.5;
+        miss_sound.setVolume(1.5);
+        miss_sound.play();
+    });
+}
+
+function backgroundSound() {
+    audioLoader1.load( 'src/sounds/background.mp3', function( buffer ) {
+        background.setBuffer( buffer );
+        background.setLoop( true );
+        background.setVolume(.5);
+        background.play();
+    });
+}
+
+const scene = new SeedScene();
 const renderer = new WebGLRenderer({ antialias: true });
 
 // Set up camera
@@ -37,32 +77,6 @@ controls.minDistance = 4;
 controls.maxDistance = 16;
 controls.update();
 
-// create an AudioListener and add it to the camera
-const listener = new THREE.AudioListener();
-camera.add( listener );
-
-// create a global audio source
-const hit_sound = new THREE.Audio( listener );
-const miss_sound = new THREE.Audio(listener);
-
-// load a sound and set it as the Audio object's buffer
-const audioLoader = new THREE.AudioLoader();
-const audioLoader1 = new THREE.AudioLoader();
-
-function hitsound() {
-    audioLoader.load( 'src/sounds/hitsound.wav', function( buffer ) {
-        hit_sound.setBuffer( buffer );
-        hit_sound.play();
-    });
-}
-
-function misssound() {
-    audioLoader1.load( 'src/sounds/miss_sound.wav', function( buffer ) {
-        miss_sound.setBuffer( buffer );
-        miss_sound.play();
-    });
-}
-
 
 function handleKeyPress(event) {
     const keyMap = {
@@ -71,9 +85,10 @@ function handleKeyPress(event) {
         Space:  2,
         KeyJ: 3,
         KeyK: 4,
+        Enter: 5,
     };
 
-    if (keyMap[event.code] !== undefined) {
+    if ((keyMap[event.code] >= 0 && keyMap[event.code] <= 4) && started) {
         var hit = scene.updateKeyPress(keyMap[event.code]);
         console.log(hit);
         if (hit) {
@@ -85,6 +100,12 @@ function handleKeyPress(event) {
 
         renderer.render(scene, camera);
     }
+
+    if (keyMap[event.code] == 5 && started == false) {
+        started = true;
+        window.requestAnimationFrame(onAnimationFrameHandler);
+        backgroundSound();
+    }
 }
 
 
@@ -93,6 +114,7 @@ const onAnimationFrameHandler = (timeStamp) => {
     controls.update();
     renderer.render(scene, camera);
     var miss = scene.update(timeStamp);
+    
     if (miss) {
         misssound();
     }
@@ -144,8 +166,6 @@ const onAnimationFrameHandler = (timeStamp) => {
     }
 };
 
-window.requestAnimationFrame(onAnimationFrameHandler);
-
 // Resize Handler
 const windowResizeHandler = () => {
     const { innerHeight, innerWidth } = window;
@@ -156,5 +176,4 @@ const windowResizeHandler = () => {
 
 windowResizeHandler();
 window.addEventListener('resize', windowResizeHandler, false);
-
 window.addEventListener("keydown", handleKeyPress);
