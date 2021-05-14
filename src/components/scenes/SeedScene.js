@@ -54,7 +54,7 @@ class GameScene extends Scene {
             4: "goal4",
         }
 
-        this.speeds = [900, 900, 900, 900, 900]
+        this.speeds = [472, 472, 900, 900, 900]
 
         // Add meshes to scene
         const lights = new BasicLights();
@@ -170,6 +170,113 @@ class GameScene extends Scene {
 
         var ls = [...this.state.updateList]
 
+        // Handle hit effects
+        switch(this.goal1.material.color.getHex().toString(16)) {
+            case 'ff00':
+                this.goal1.material.color.setHex('0x01ff01');
+                break;
+            case '1ff01':
+                this.goal1.material.color.setHex('0x02ff02');
+                break;
+            case '2ff02':
+                this.goal1.material.color.setHex('0x03ff03');
+                break;
+            case '3ff03':
+                this.goal1.material.color.setHex('0x04ff04');
+                break;
+            case '4ff04':
+                this.goal1.material.color.setHex('0x05ff05');
+                break;
+            default:
+                this.goal1.material.color.setHex('0xffffff');
+                break;
+        }
+
+        switch(this.goal2.material.color.getHex().toString(16)) {
+            case 'ff00':
+                this.goal2.material.color.setHex('0x01ff01');
+                break;
+            case '1ff01':
+                this.goal2.material.color.setHex('0x02ff02');
+                break;
+            case '2ff02':
+                this.goal2.material.color.setHex('0x03ff03');
+                break;
+            case '3ff03':
+                this.goal2.material.color.setHex('0x04ff04');
+                break;
+            case '4ff04':
+                this.goal2.material.color.setHex('0x05ff05');
+                break;
+            default:
+                this.goal2.material.color.setHex('0xffffff');
+                break;
+        }
+
+        switch(this.goal3.material.color.getHex().toString(16)) {
+            case 'ff00':
+                this.goal3.material.color.setHex('0x01ff01');
+                break;
+            case '1ff01':
+                this.goal3.material.color.setHex('0x02ff02');
+                break;
+            case '2ff02':
+                this.goal3.material.color.setHex('0x03ff03');
+                break;
+            case '3ff03':
+                this.goal3.material.color.setHex('0x04ff04');
+                break;
+            case '4ff04':
+                this.goal3.material.color.setHex('0x05ff05');
+                break;
+            default:
+                this.goal3.material.color.setHex('0xffffff');
+                break;
+        }
+
+        switch(this.goal4.material.color.getHex().toString(16)) {
+            case 'ff00':
+                this.goal4.material.color.setHex('0x01ff01');
+                break;
+            case '1ff01':
+                this.goal4.material.color.setHex('0x02ff02');
+                break;
+            case '2ff02':
+                this.goal4.material.color.setHex('0x03ff03');
+                break;
+            case '3ff03':
+                this.goal4.material.color.setHex('0x04ff04');
+                break;
+            case '4ff04':
+                this.goal4.material.color.setHex('0x05ff05');
+                break;
+            default:
+                this.goal4.material.color.setHex('0xffffff');
+                break;
+        }
+
+        switch(this.goal5.material.color.getHex().toString(16)) {
+            case 'ff00':
+                this.goal5.material.color.setHex('0x01ff01');
+                break;
+            case '1ff01':
+                this.goal5.material.color.setHex('0x02ff02');
+                break;
+            case '2ff02':
+                this.goal5.material.color.setHex('0x03ff03');
+                break;
+            case '3ff03':
+                this.goal5.material.color.setHex('0x04ff04');
+                break;
+            case '4ff04':
+                this.goal5.material.color.setHex('0x05ff05');
+                break;
+            default:
+                this.goal5.material.color.setHex('0xffffff');
+                break;
+        }
+        
+
         // updates position of all notes that are moving
         for (const obj of ls) {
             obj.update(timeStamp);
@@ -209,27 +316,27 @@ class GameScene extends Scene {
             }
 
             if (lane == 0) {
-                this.goal1.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                this.goal1.material.color.setHex('0x00ff00');
                 return true;
             }
             
             else if (lane == 1) {
-                this.goal2.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                this.goal2.material.color.setHex('0x00ff00');
                 return true;
             } 
 
             else if (lane == 2) {
-                this.goal3.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                this.goal3.material.color.setHex('0x00ff00');
                 return true;
             } 
 
             else if (lane == 3) {
-                this.goal4.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                this.goal4.material.color.setHex('0x00ff00');
                 return true;
             } 
 
             else if (lane == 4) {
-                this.goal5.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                this.goal5.material.color.setHex('0x00ff00');
                 return true;
             } 
 
