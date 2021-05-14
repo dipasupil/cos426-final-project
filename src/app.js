@@ -22,7 +22,7 @@ camera.add( listener );
 // create a global audio source
 const hit_sound = new THREE.Audio( listener );
 const miss_sound = new THREE.Audio(listener);
-const background = new THREE.Audio(listener)
+const background = new THREE.Audio(listener);
 
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new THREE.AudioLoader();
@@ -30,14 +30,14 @@ const audioLoader1 = new THREE.AudioLoader();
 var started = false;
 
 function hitsound() {
-    audioLoader.load( 'src/sounds/hitsound.wav', function( buffer ) {
+    audioLoader.load('src/components/sounds/hitsound.wav', function( buffer ) {
         hit_sound.setBuffer( buffer );
         hit_sound.play();
     });
 }
 
 function misssound() {
-    audioLoader1.load( 'src/sounds/miss_sound.wav', function( buffer ) {
+    audioLoader1.load( 'src/components/sounds//miss_sound.wav', function( buffer ) {
         miss_sound.setBuffer( buffer );
         miss_sound.playbackRate = 1.5;
         miss_sound.setVolume(1.5);
@@ -46,9 +46,9 @@ function misssound() {
 }
 
 function backgroundSound() {
-    audioLoader1.load( 'src/sounds/background.mp3', function( buffer ) {
+    audioLoader1.load( 'src/components/sounds/background.mp3', function( buffer ) {
         background.setBuffer( buffer );
-        background.setLoop( true );
+        background.setLoop(true);
         background.setVolume(.5);
         background.play();
     });
@@ -90,7 +90,6 @@ function handleKeyPress(event) {
 
     if ((keyMap[event.code] >= 0 && keyMap[event.code] <= 4) && started) {
         var hit = scene.updateKeyPress(keyMap[event.code]);
-        console.log(hit);
         if (hit) {
             hitsound();
         }
@@ -113,7 +112,7 @@ function handleKeyPress(event) {
 const onAnimationFrameHandler = (timeStamp) => {
     controls.update();
     renderer.render(scene, camera);
-    var miss = scene.update(timeStamp);
+    var miss = scene.update(timeStamp, started);
     
     if (miss) {
         misssound();

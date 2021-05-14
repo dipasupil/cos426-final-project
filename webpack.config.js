@@ -23,7 +23,7 @@ module.exports = {
                 exclude: path.resolve(__dirname, './node_modules/'),
             },
             {
-                test: /\.(jpe?g|png|gif|svg|tga|gltf|babylon|mtl|pcb|pcd|prwm|obj|mat|mp3|ogg)$/i,
+                test: /\.(jpe?g|png|gif|svg|tga|gltf|babylon|mtl|pcb|pcd|prwm|obj|mat|mp3|wav|ogg)$/i,
                 use: 'file-loader',
                 exclude: path.resolve(__dirname, './node_modules/'),
             },
@@ -49,6 +49,7 @@ module.exports = {
             lights$: path.resolve(__dirname, 'src/components/lights'),
             objects$: path.resolve(__dirname, 'src/components/objects'),
             scenes$: path.resolve(__dirname, 'src/components/scenes'),
+            sounds$: path.resolve(__dirname, 'src/components/sounds'),
         },
     },
     plugins: [

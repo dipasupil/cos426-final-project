@@ -1,9 +1,8 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
-import { Flower, Land, Heartm, Note } from 'objects';
+import { Flower, Land, Heart, Note } from 'objects';
 import { BasicLights } from 'lights';
 import * as THREE from 'three';
-import HelvetikerFont from 'three/examples/fonts/helvetiker_regular.typeface.json';
 
 
 
@@ -131,7 +130,7 @@ class GameScene extends Scene {
         return Math.floor(Math.random()*(5))
     }
 
-    update(timeStamp) {
+    update(timeStamp, started) {
          // note test
         var speed; 
         
@@ -142,7 +141,7 @@ class GameScene extends Scene {
         else if (timeStamp >= 40000) speed = this.speeds[4];
 
         // adds note every X seconds
-        if ((Math.ceil(timeStamp / 10) * 10) % speed == 0) {
+        if (((Math.ceil(timeStamp / 10) * 10) % speed == 0) || !started) {
          
         var random = this.random_lane();
         while (this.getObjectByName(this.lane_notes[random]) != undefined) {
