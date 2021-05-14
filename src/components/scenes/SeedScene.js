@@ -22,9 +22,10 @@ class GameScene extends Scene {
         instructions.style.position = 'absolute';
         instructions.style.color = "white";
         instructions.style.fontFamily = "Roboto";
-        instructions.innerHTML = "The 'D', 'F', Space, 'J', and 'K' keys correspond to</br> each of the five lanes, respectively. When a note</br> reaches the lane's 'goal', tap the corresponding key!</br> Your score will increment based on how accurate</br> your timing was. If you lose all five lives, the game ends.</br></br>Start the game by hitting Enter!";
-        instructions.style.top = 100 + 'px';
-        instructions.style.left = 100 + 'px';
+        instructions.innerHTML = "The 'D', 'F', Space, 'J', and 'K' keys correspond to</br> each of the five lanes, respectively. <br> <br>When a note reaches the lane's 'goal', tap the corresponding key!</br><br> Your score will increment based on how accurate</br> your timing was. If you lose all five lives, the game ends.</br></br>Start the game by hitting Enter!";
+        instructions.style.top = '35%'
+        instructions.style.left = '40%';
+        instructions.id = "instructions"
         document.body.appendChild(instructions);
 
         // Set background to a nice color

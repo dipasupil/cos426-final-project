@@ -102,6 +102,8 @@ function handleKeyPress(event) {
 
     if (keyMap[event.code] == 5 && started == false) {
         started = true;
+        var instructions = document.getElementById("instructions");
+        instructions.remove();
         window.requestAnimationFrame(onAnimationFrameHandler);
         backgroundSound();
     }
