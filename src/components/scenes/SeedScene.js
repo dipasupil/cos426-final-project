@@ -15,9 +15,18 @@ class GameScene extends Scene {
 
         // Init state
         this.state = {
-            gui: new Dat.GUI(), // Create GUI for scene
+            // gui: new Dat.GUI(), // Create GUI for scene
             updateList: [],
         };
+
+        var instructions = document.createElement('div');
+        instructions.style.position = 'absolute';
+        instructions.style.backgroundColor = "white";
+        instructions.style.fontFamily = "Roboto";
+        instructions.innerHTML = "The 'D', 'F', Space, 'J', and 'K' keys correspond to</br> each of the five lanes, respectively. When a note</br> reaches the lane's 'goal', tap the corresponding key!</br> Your score will increment based on how accurate</br> your timing was. If you lose all five lives, the game ends.</br></br>Start the game by hitting Enter!";
+        instructions.style.top = 100 + 'px';
+        instructions.style.left = 100 + 'px';
+        document.body.appendChild(instructions);
 
         // Set background to a nice color
         this.background = new Color(0x89CFF0);
