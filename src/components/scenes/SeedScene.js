@@ -46,6 +46,14 @@ class GameScene extends Scene {
             4: "note4",
         };
 
+        this.lane_goals = {
+            0: "goal0",
+            1: "goal1",
+            2: "goal2",
+            3: "goal3",
+            4: "goal4",
+        }
+
         this.speeds = [900, 900, 900, 900, 900]
 
         // Add meshes to scene
@@ -61,32 +69,37 @@ class GameScene extends Scene {
 
         // goal areas for notes
         var boxGeom = new THREE.BoxGeometry(1.3,0.5,.7);
-        var boxMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.5});
+        var boxMaterial1 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.5});
+        var boxMaterial2 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.5});
+        var boxMaterial3 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.5});
+        var boxMaterial4 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.5});
+        var boxMaterial5 = new THREE.MeshBasicMaterial({color: 0xffffff, transparent:true, opacity:0.5});
 
-        var goal1 = new THREE.Mesh(boxGeom, boxMaterial);
-        goal1.name = "goal5"
-        this.add(goal1)
-        goal1.position.set(-4,0,4)
 
-        var goal2 = new THREE.Mesh(boxGeom, boxMaterial);
-        goal1.name = "goal5"
-        this.add(goal2)
-        goal2.position.set(-2,0,4)
+        this.goal1 = new THREE.Mesh(boxGeom, boxMaterial1);
+        this.goal1.name = "goal1"
+        this.add(this.goal1)
+        this.goal1.position.set(-4,0,4)
 
-        var goal3 = new THREE.Mesh(boxGeom, boxMaterial);
-        goal1.name = "goal5"
-        this.add(goal3)
-        goal3.position.set(0,0,4)
+        this.goal2 = new THREE.Mesh(boxGeom, boxMaterial2);
+        this.goal2.name = "goal2"
+        this.add(this.goal2)
+        this.goal2.position.set(-2,0,4)
 
-        var goal4 = new THREE.Mesh(boxGeom, boxMaterial);
-        goal1.name = "goal5"
-        this.add(goal4)
-        goal4.position.set(2,0,4)
+        this.goal3 = new THREE.Mesh(boxGeom, boxMaterial3);
+        this.goal3.name = "goal3"
+        this.add(this.goal3)
+        this.goal3.position.set(0,0,4)
 
-        var goal5 = new THREE.Mesh(boxGeom, boxMaterial);
-        goal1.name = "goal5"
-        this.add(goal5)
-        goal5.position.set(4,0,4)
+        this.goal4 = new THREE.Mesh(boxGeom, boxMaterial4);
+        this.goal4.name = "goal4"
+        this.add(this.goal4)
+        this.goal4.position.set(2,0,4)
+
+        this.goal5 = new THREE.Mesh(boxGeom, boxMaterial5);
+        this.goal5.name = "goal5"
+        this.add(this.goal5)
+        this.goal5.position.set(4,0,4)
 
         
         // life counters
@@ -174,7 +187,7 @@ class GameScene extends Scene {
         }
     }
 
-    checkHit(obj) {        
+    checkHit(obj, lane) {        
         // if within bounds, add score
         var object_pos = obj.getWorldPosition(new THREE.Vector3()).z;
         if (object_pos > 3 && object_pos < 5.5) {
@@ -194,6 +207,34 @@ class GameScene extends Scene {
                     this.state.updateList.splice(index, 1);
                 }
             }
+
+            if (lane == 0) {
+                this.goal1.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                return true;
+            }
+            
+            else if (lane == 1) {
+                this.goal2.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                return true;
+            } 
+
+            else if (lane == 2) {
+                this.goal3.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                return true;
+            } 
+
+            else if (lane == 3) {
+                this.goal4.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                return true;
+            } 
+
+            else if (lane == 4) {
+                this.goal5.material.color.setHex('0x'+(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0'));
+                return true;
+            } 
+
+            
+                       
             
             return true;
             
@@ -216,7 +257,7 @@ class GameScene extends Scene {
                 return;
             }
             else {
-                var hit = this.checkHit(obj);
+                var hit = this.checkHit(obj, lane);
                 return hit
             }
         }
@@ -228,7 +269,7 @@ class GameScene extends Scene {
                 return;
             } 
             else {
-                var hit = this.checkHit(obj);
+                var hit = this.checkHit(obj, lane);
                 return hit;
             }
         }
@@ -240,7 +281,7 @@ class GameScene extends Scene {
                 return;
             }
             else {
-                var hit = this.checkHit(obj);
+                var hit = this.checkHit(obj, lane);
                 return hit;
             }
         }
@@ -252,7 +293,7 @@ class GameScene extends Scene {
                 return;
             }
             else {
-                var hit = this.checkHit(obj);
+                var hit = this.checkHit(obj, lane);
                 return hit;
             }
         }
@@ -264,7 +305,7 @@ class GameScene extends Scene {
                 return;
             }
             else {
-                var hit = this.checkHit(obj);
+                var hit = this.checkHit(obj, lane);
                 return hit;
             }
         }
