@@ -122,7 +122,7 @@ class GameScene extends Scene {
         return Math.floor(Math.random()*(5))
     }
 
-    update(timeStamp) {
+    update(timeStamp, started) {
          // note test
         var speed; 
         
@@ -133,7 +133,7 @@ class GameScene extends Scene {
         else if (timeStamp >= 40000) speed = this.speeds[4];
 
         // adds note every X seconds
-        if ((Math.ceil(timeStamp / 10) * 10) % speed == 0) {
+        if (((Math.ceil(timeStamp / 10) * 10) % speed == 0) || !started) {
          
         var random = this.random_lane();
         while (this.getObjectByName(this.lane_notes[random]) != undefined) {

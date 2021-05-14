@@ -11,8 +11,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { SeedScene } from 'scenes';
 import * as THREE from 'three';
 
-
-
 // Initialize core ThreeJS components
 const camera = new PerspectiveCamera();
 
@@ -31,14 +29,14 @@ const audioLoader1 = new THREE.AudioLoader();
 var started = false;
 
 function hitsound() {
-    audioLoader.load( 'src/components/objects/sounds/hitsound.wav', function( buffer ) {
+    audioLoader.load('hitsound.wav', function( buffer ) {
         hit_sound.setBuffer( buffer );
         hit_sound.play();
     });
 }
 
 function misssound() {
-    audioLoader1.load( 'src/components/objects/sounds/miss_sound.wav', function( buffer ) {
+    audioLoader1.load('miss_sound.wav', function( buffer ) {
         miss_sound.setBuffer( buffer );
         miss_sound.playbackRate = 1.5;
         miss_sound.setVolume(1.5);
@@ -47,9 +45,9 @@ function misssound() {
 }
 
 function backgroundSound() {
-    audioLoader1.load( 'src/components/objects/sounds/background.mp3', function( buffer ) {
+    audioLoader1.load( 'background.mp3', function( buffer ) {
         background.setBuffer( buffer );
-        background.setLoop( true );
+        background.setLoop(true);
         background.setVolume(.5);
         background.play();
     });
@@ -91,7 +89,6 @@ function handleKeyPress(event) {
 
     if ((keyMap[event.code] >= 0 && keyMap[event.code] <= 4) && started) {
         var hit = scene.updateKeyPress(keyMap[event.code]);
-        console.log(hit);
         if (hit) {
             hitsound();
         }
@@ -114,7 +111,7 @@ function handleKeyPress(event) {
 const onAnimationFrameHandler = (timeStamp) => {
     controls.update();
     renderer.render(scene, camera);
-    var miss = scene.update(timeStamp);
+    var miss = scene.update(timeStamp, started);
     
     if (miss) {
         misssound();
