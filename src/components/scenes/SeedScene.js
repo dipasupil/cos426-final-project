@@ -1,9 +1,8 @@
 import * as Dat from 'dat.gui';
 import { Scene, Color } from 'three';
-import { Flower, Land, Heartm, Note } from 'objects';
+import { Flower, Land, Heart, Note } from 'objects';
 import { BasicLights } from 'lights';
 import * as THREE from 'three';
-import HelvetikerFont from 'three/examples/fonts/helvetiker_regular.typeface.json';
 
 
 

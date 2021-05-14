@@ -29,14 +29,14 @@ const audioLoader1 = new THREE.AudioLoader();
 var started = false;
 
 function hitsound() {
-    audioLoader.load('hitsound.wav', function( buffer ) {
+    audioLoader.load( 'src/components/objects/sounds/hitsound.wav', function( buffer ) {
         hit_sound.setBuffer( buffer );
         hit_sound.play();
     });
 }
 
 function misssound() {
-    audioLoader1.load('miss_sound.wav', function( buffer ) {
+    audioLoader1.load( 'src/components/objects/sounds/miss_sound.wav', function( buffer ) {
         miss_sound.setBuffer( buffer );
         miss_sound.playbackRate = 1.5;
         miss_sound.setVolume(1.5);
@@ -45,7 +45,7 @@ function misssound() {
 }
 
 function backgroundSound() {
-    audioLoader1.load( 'background.mp3', function( buffer ) {
+    audioLoader1.load( 'src/components/objects/sounds/background.mp3', function( buffer ) {
         background.setBuffer( buffer );
         background.setLoop(true);
         background.setVolume(.5);
